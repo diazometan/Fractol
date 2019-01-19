@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 13:56:05 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/01/18 21:07:58 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/01/19 20:36:41 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,22 @@ void    ft_init_comlex(t_mlx *mlx)
 {
     if(!(mlx->comlex = (t_comlex*)malloc(sizeof(t_comlex))))
         exit(1);
-    mlx->comlex->Re_x = 0;
-    mlx->comlex->Im_y = 0;
+    mlx->comlex->Re = 0;
+    mlx->comlex->Im = 0;
     mlx->comlex->Re_c = 0;
     mlx->comlex->Im_c = 0;
+	mlx->comlex->zoom = 1;
 	mlx->comlex->Min_Re = -2.0;
 	mlx->comlex->Max_Re = 2.0;
 	mlx->comlex->Min_Im = -2.0;
-	//mlx->comlex->Max_Im = mlx->comlex->Min_Im + (mlx->comlex->Max_Re - mlx->comlex->Min_Re) * WIN_HEIGHT / WIN_WIDTH;
 	mlx->comlex->Max_Im = 2.0;
-	mlx->comlex->Re_factor = (mlx->comlex->Max_Re - mlx->comlex->Min_Re) / WIN_WIDTH;
-	mlx->comlex->Im_factor = (mlx->comlex->Max_Im - mlx->comlex->Min_Im) / WIN_HEIGHT;
+	//mlx->comlex->Max_Im = mlx->comlex->Min_Im + (mlx->comlex->Max_Re - mlx->comlex->Min_Re) * WIN_HEIGHT / WIN_WIDTH;
 	mlx->comlex->Re_Julia_const = -0.8;
 	mlx->comlex->Im_Julia_const = 0.156;
+	//mlx->comlex->step_x = (mlx->comlex->Max_Re - mlx->comlex->Min_Re) / (WIN_WIDTH);
+	//mlx->comlex->step_y = (mlx->comlex->Max_Im - mlx->comlex->Min_Im) / (WIN_HEIGHT);
+	mlx->comlex->x_offset = 0;
+	mlx->comlex->y_offset = 0;
 }
 
 void	ft_init_mlx(t_mlx *mlx)

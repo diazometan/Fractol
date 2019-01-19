@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 11:51:56 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/01/18 21:20:23 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/01/19 19:39:02 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # define WIN_WIDTH 1080
 # define WIN_HEIGHT 1080
 
-# define MAX 100
+# define MAX 30
 
 # include <math.h>
 # include <stdlib.h>
@@ -54,8 +54,8 @@ typedef struct	s_mouse
 
 typedef struct	s_comlex
 {
-	double		Re_x;
-	double		Im_y;
+	double		Re;
+	double		Im;
 	double		Re_c;
 	double		Im_c;
 	double		z_R;
@@ -63,10 +63,13 @@ typedef struct	s_comlex
 	double		Max_Re;
 	double		Min_Im;
 	double		Max_Im;
-	double		Re_factor;
-	double		Im_factor;
+	double		step_x;
+	double		step_y;
 	double		Re_Julia_const;
 	double		Im_Julia_const;
+	double		zoom;
+	double		x_offset;
+	double		y_offset;
 }				t_comlex;
 
 typedef struct	s_mlx
