@@ -6,17 +6,17 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 11:51:56 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/01/19 19:39:02 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/01/23 21:11:45 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-# define WIN_WIDTH 1080
-# define WIN_HEIGHT 1080
+# define WIN_WIDTH 1000
+# define WIN_HEIGHT 1000
 
-# define MAX 30
+# define MAX 100
 
 # include <math.h>
 # include <stdlib.h>
@@ -44,8 +44,8 @@ typedef struct	s_img
 
 typedef struct	s_mouse
 {
-	int			x;
-	int			y;
+	double			x;
+	double			y;
 	int			pre_x;
 	int			pre_y;
 	int			press_1;
@@ -65,6 +65,8 @@ typedef struct	s_comlex
 	double		Max_Im;
 	double		step_x;
 	double		step_y;
+	double		step_x_0;
+	double		step_y_0;
 	double		Re_Julia_const;
 	double		Im_Julia_const;
 	double		zoom;

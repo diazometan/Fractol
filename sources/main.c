@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 11:51:21 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/01/19 21:06:21 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/01/23 10:07:38 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int main(int argc, char **argv)
     mlx.mouse->x = 0;
 	mlx.mouse->y = 0;
     ft_init_key(&mlx);
+    if (argc == 1)
+        exit (1);
     if (ft_strcmp (argv[1], "1"))
         ft_draw(&mlx);
     if (ft_strcmp (argv[1], "2"))

@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 13:52:08 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/01/19 19:18:42 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/01/23 21:12:06 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ void ft_draw_julia(t_mlx *mlx)
 	int i;
 	int j;
 
-	mlx->comlex->step_x = (mlx->comlex->Max_Re - mlx->comlex->Min_Re) / (WIN_WIDTH * mlx->comlex->zoom);
-	mlx->comlex->step_y = (mlx->comlex->Max_Im - mlx->comlex->Min_Im) / (WIN_HEIGHT * mlx->comlex->zoom);
 	y = mlx->comlex->Min_Im;
 	i = 0;
 	while (i < WIN_HEIGHT)

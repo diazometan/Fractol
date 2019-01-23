@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 14:47:36 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/01/19 21:46:23 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/01/23 20:58:17 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,21 +62,6 @@
 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->img.img_ptr, 0, 0);
 }*/
 
-// void		ft_change(t_mlx *mlx)
-// {
-// 		mlx->comlex->x_offset = mlx->mouse->x;
-// 		mlx->comlex->y_offset = mlx->mouse->y;
-// 		mlx->comlex->x_offset *= mlx->comlex->Re_factor;
-// 		mlx->comlex->y_offset *= mlx->comlex->Im_factor;
-// 		mlx->comlex->Re_x += mlx->comlex->x_offset;
-// 		mlx->comlex->Im_y += mlx->comlex->y_offset;
-
-// 		mlx->comlex->Re_x /= mlx->comlex->zoom;
-// 		mlx->comlex->Im_y /= mlx->comlex->zoom;
-// 		mlx->comlex->Re_x -= mlx->comlex->x_offset;
-// 		mlx->comlex->Im_y -= mlx->comlex->y_offset;
-// }
-
 void		ft_draw(t_mlx *mlx)
 {
 	double aa;
@@ -88,17 +73,6 @@ void		ft_draw(t_mlx *mlx)
 	int i;
 	int j;
 
-	printf("DO %f\n", mlx->comlex->Min_Re);
-	printf("DO %f\n", mlx->comlex->Min_Im);
-	mlx->comlex->step_x = (mlx->comlex->Max_Re - mlx->comlex->Min_Re) / (WIN_WIDTH * mlx->comlex->zoom);
-	mlx->comlex->step_y = (mlx->comlex->Max_Im - mlx->comlex->Min_Im) / (WIN_HEIGHT * mlx->comlex->zoom);
-	mlx->comlex->Min_Im = mlx->comlex->Min_Im / mlx->comlex->zoom + mlx->comlex->step_y * mlx->comlex->y_offset;
-	mlx->comlex->Min_Re = mlx->comlex->Min_Re / mlx->comlex->zoom + mlx->comlex->step_x * mlx->comlex->x_offset;
-	mlx->comlex->Max_Re = mlx->comlex->Min_Re + mlx->comlex->step_x * WIN_WIDTH;
-	mlx->comlex->Max_Im = mlx->comlex->Min_Im + mlx->comlex->step_y * WIN_HEIGHT;
-	printf("AFTER %f\n", mlx->comlex->Min_Re);
-	printf("AFTER %f\n", mlx->comlex->Min_Im);
-	printf("======\n");
 	i = 0;
 	mlx->comlex->Im = mlx->comlex->Min_Im;
 	while (i < WIN_HEIGHT)
@@ -135,6 +109,5 @@ void		ft_draw(t_mlx *mlx)
 		mlx->comlex->Im += mlx->comlex->step_y;
 		i++;
 	}
-	mlx->img.data[540 + 540 * 1080] = 0xFFFFFF;
 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->img.img_ptr, 0, 0);
 }
