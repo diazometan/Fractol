@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 11:51:56 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/01/23 21:11:45 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/01/24 12:22:30 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ typedef struct	s_comlex
 	double		zoom;
 	double		x_offset;
 	double		y_offset;
+	int			fractal_type;
 }				t_comlex;
 
 typedef struct	s_mlx
@@ -94,8 +95,9 @@ int				mouse_release(int button, int x, int y, t_mlx *mlx);
 int				mouse_move(int x, int y, t_mlx *mlx);
 int				exit_x(void);
 
-void			ft_draw(t_mlx *mlx);
+void			ft_draw_mandelbrot(t_mlx *mlx);
 void			ft_draw_julia(t_mlx *mlx);
+void			ft_draw_ship(t_mlx *mlx);
 
 float			ft_radian(double degree);
 int				ft_abs(int a);

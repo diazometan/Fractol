@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 14:47:36 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/01/23 20:58:17 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/01/24 12:27:25 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,9 @@
 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->img.img_ptr, 0, 0);
 }*/
 
-void		ft_draw(t_mlx *mlx)
+void		ft_draw_mandelbrot(t_mlx *mlx)
 {
+	mlx->comlex->fractal_type = 1;
 	double aa;
     double bb;
     double twoab;
@@ -96,9 +97,7 @@ void		ft_draw(t_mlx *mlx)
 				n++;
 			}
 			if (n == MAX)
-			{
 				mlx->img.data[j + WIN_WIDTH * i] = 0;
-			}
 			else
 			{
 				mlx->img.data[j + WIN_WIDTH * i] = 0x00000F << n;

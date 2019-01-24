@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 13:56:05 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/01/23 20:58:21 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/01/24 11:46:26 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,10 @@ void    ft_init_comlex(t_mlx *mlx)
 	mlx->comlex->Max_Re = 2.0;
 	mlx->comlex->Min_Im = -2.0;
 	mlx->comlex->Max_Im = 2.0;
-	//mlx->comlex->Max_Im = mlx->comlex->Min_Im + (mlx->comlex->Max_Re - mlx->comlex->Min_Re) * WIN_HEIGHT / WIN_WIDTH;
 	mlx->comlex->Re_Julia_const = -0.8;
 	mlx->comlex->Im_Julia_const = 0.156;
-	mlx->comlex->step_x = (mlx->comlex->Max_Re - mlx->comlex->Min_Re) / WIN_WIDTH ;
+	mlx->comlex->step_x = (mlx->comlex->Max_Re - mlx->comlex->Min_Re) / WIN_WIDTH;
 	mlx->comlex->step_y = (mlx->comlex->Max_Im - mlx->comlex->Min_Im) / WIN_HEIGHT;
-	mlx->comlex->x_offset = 0;
-	mlx->comlex->y_offset = 0;
 }
 
 void	ft_init_mlx(t_mlx *mlx)
