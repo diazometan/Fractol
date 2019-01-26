@@ -6,7 +6,7 @@
 #    By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/10 16:55:04 by lwyl-the          #+#    #+#              #
-#    Updated: 2019/01/24 12:21:15 by lwyl-the         ###   ########.fr        #
+#    Updated: 2019/01/26 19:08:26 by lwyl-the         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,9 @@ SRC = sources/main.c\
 	sources/assistant.c\
 	sources/ft_mandelbrot.c\
 	sources/ft_burnship.c\
-	sources/ft_julia.c
+	sources/ft_julia.c\
+	sources/get_next_line.c\
+	sources/ft_zoom.c
 
 OBJ = $(SRC:.c=.o)
 

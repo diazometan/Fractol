@@ -6,11 +6,23 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 13:56:05 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/01/24 11:46:26 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/01/26 18:43:56 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+void	ft_init_fractal(t_mlx *mlx)
+{
+	if(!(mlx->fractal = (t_fractal*)malloc(sizeof(t_fractal))))
+		exit(1);
+}
+
+void	ft_init_cl(t_mlx *mlx)
+{
+	if(!(mlx->cl = (t_cl*)malloc(sizeof(t_cl))))
+		exit(1);
+}
 
 void    ft_init_comlex(t_mlx *mlx)
 {

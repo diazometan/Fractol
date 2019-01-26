@@ -6,52 +6,55 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/24 12:18:11 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/01/24 12:24:02 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/01/26 17:19:48 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void		ft_draw_ship(t_mlx *mlx)
+static void	ft_iteration(t_mlx *mlx, int i, int j)
 {
-    mlx->comlex->fractal_type = 3;
 	double aa;
     double bb;
     double twoab;
-	double a;
-	double b;
-    int n;
+	int n;
+
+	n = 0;
+	while (n < MAX)
+	{
+		aa = mlx->fractal->x * mlx->fractal->x;
+		bb = mlx->fractal->y * mlx->fractal->y;
+		twoab = 2.0 * mlx->fractal->x * mlx->fractal->y;
+		if (aa + bb > 4.0)
+			break ;
+		mlx->fractal->x = aa - bb + mlx->comlex->Re;
+		mlx->fractal->y = fabs(twoab) + mlx->comlex->Im;
+		n++;
+	}
+	if (n == MAX)
+		mlx->img.data[j + WIN_WIDTH * i] = 0;
+	else
+		mlx->img.data[j + WIN_WIDTH * i] = 0x00000F << n;
+}
+
+void		ft_draw_ship(t_mlx *mlx)
+{
 	int i;
 	int j;
 
-	i = 0;
+	mlx_clear_window(mlx->mlx_ptr, mlx->win_ptr);
+	mlx->comlex->fractal_type = 3;
 	mlx->comlex->Im = mlx->comlex->Min_Im;
+	i = 0;
 	while (i < WIN_HEIGHT)
 	{
 		j = 0;
 		mlx->comlex->Re = mlx->comlex->Min_Re;
 		while (j < WIN_WIDTH)
 		{
-			a = mlx->comlex->Re;
-			b = mlx->comlex->Im;
-			n = 0;
-			while (n < MAX)
-			{
-				aa = a * a;
-				bb = b * b;
-				twoab = 2.0 * a * b;
-				if (a * a + b * b > 4.0)
-					break ;
-				a = aa - bb + mlx->comlex->Re;
-				b = fabs(twoab) + mlx->comlex->Im;
-				n++;
-			}
-			if (n == MAX)
-				mlx->img.data[j + WIN_WIDTH * i] = 0;
-			else
-			{
-				mlx->img.data[j + WIN_WIDTH * i] = 0x00000F << n;
-			}
+			mlx->fractal->x = mlx->comlex->Re;
+			mlx->fractal->y = mlx->comlex->Im;
+			ft_iteration(mlx, i, j);
 			j++;
 			mlx->comlex->Re += mlx->comlex->step_x;
 		}

@@ -6,102 +6,71 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 14:47:36 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/01/24 12:27:25 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/01/26 17:19:32 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//mlx->img.data
-
-//(a + bi) * (a + bi) = (aa - bb) + 2abi 
-
 #include "fractol.h"
 
-/*void		ft_draw(t_mlx *mlx)
+/*int rgb(int n, double a, double b)
 {
-    double aa;
-    double bb;
-    double twoab;
-    int x;
-    int y;
-    int n;
+	double r;
+	double g;
+	double d;
+	double color;
+	double color_1;
 
-	mlx->comlex->Re_factor = (mlx->comlex->Max_Re - mlx->comlex->Min_Re) / (WIN_WIDTH * mlx->comlex->zoom);
-	mlx->comlex->Im_factor = (mlx->comlex->Max_Im - mlx->comlex->Min_Im) / (WIN_HEIGHT * mlx->comlex->zoom);
-	mlx->comlex->Max_Im = mlx->comlex->Max_Im - mlx->comlex->Im_factor * mlx->mouse->y;
-	mlx->comlex->Min_Re = mlx->comlex->Min_Re + mlx->comlex->Re_factor * mlx->mouse->x;
-    y = 0;
-    while (y < WIN_HEIGHT)
-    {
-        mlx->comlex->Im_c = mlx->comlex->Max_Im - y * mlx->comlex->Im_factor;
-        x = 0;
-        while (x < WIN_WIDTH)
-        {
-            mlx->comlex->Re_c = mlx->comlex->Min_Re + x * mlx->comlex->Re_factor;
-			mlx->comlex->Re_x = mlx->comlex->Re_c;
-			mlx->comlex->Im_y = mlx->comlex->Im_c;
-			n = 0;
-			while (n < MAX)
-			{
-				aa = mlx->comlex->Re_x * mlx->comlex->Re_x;
-				bb = mlx->comlex->Im_y * mlx->comlex->Im_y;
-				twoab = 2 * mlx->comlex->Re_x * mlx->comlex->Im_y;
-				if (aa + bb > 4)
-					break;
-				mlx->comlex->Re_x = aa - bb + mlx->comlex->Re_c;
-				mlx->comlex->Im_y = twoab +  mlx->comlex->Im_c;
-				n++;
-			}
-			if (n == MAX)
-				mlx->img.data[x + WIN_WIDTH * y] = 0;
-			else
-				mlx->img.data[x + WIN_WIDTH * y] = 0x00000F << n;
-			x++;
-        }
-		y++;
-    }
-	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->img.img_ptr, 0, 0);
+	color = (n + 2 - log2(log2(a + b))) / MAX;
+	color_1 = color - (int)color;
+	r = (int)(74 * color_1);
+	g = (int)(205 * color_1);
+	d = (int)(196 * color_1);
+	return ((int)r << 16 | (int)g << 8 | (int)d);
 }*/
 
-void		ft_draw_mandelbrot(t_mlx *mlx)
+static void	ft_iteration(t_mlx *mlx, int i, int j)
 {
-	mlx->comlex->fractal_type = 1;
 	double aa;
     double bb;
     double twoab;
-	double a;
-	double b;
-    int n;
+	int n;
+
+	n = 0;
+	while (n < MAX)
+	{
+		aa = mlx->fractal->x * mlx->fractal->x;
+		bb = mlx->fractal->y * mlx->fractal->y;
+		twoab = 2.0 * mlx->fractal->x * mlx->fractal->y;
+		if (aa + bb > 4.0)
+			break ;
+		mlx->fractal->x = aa - bb + mlx->comlex->Re;
+		mlx->fractal->y = twoab + mlx->comlex->Im;
+		n++;
+	}
+	if (n == MAX)
+		mlx->img.data[j + WIN_WIDTH * i] = 0;
+	else
+		mlx->img.data[j + WIN_WIDTH * i] = 0x00000F << n;
+}
+
+void		ft_draw_mandelbrot(t_mlx *mlx)
+{
 	int i;
 	int j;
 
-	i = 0;
+	mlx_clear_window(mlx->mlx_ptr, mlx->win_ptr);
+	mlx->comlex->fractal_type = 1;
 	mlx->comlex->Im = mlx->comlex->Min_Im;
+	i = 0;
 	while (i < WIN_HEIGHT)
 	{
 		j = 0;
 		mlx->comlex->Re = mlx->comlex->Min_Re;
 		while (j < WIN_WIDTH)
 		{
-			a = mlx->comlex->Re;
-			b = mlx->comlex->Im;
-			n = 0;
-			while (n < MAX)
-			{
-				aa = a * a;
-				bb = b * b;
-				twoab = 2.0 * a * b;
-				if (a * a + b * b > 4.0)
-					break ;
-				a = aa - bb + mlx->comlex->Re;
-				b = twoab + mlx->comlex->Im;
-				n++;
-			}
-			if (n == MAX)
-				mlx->img.data[j + WIN_WIDTH * i] = 0;
-			else
-			{
-				mlx->img.data[j + WIN_WIDTH * i] = 0x00000F << n;
-			}
+			mlx->fractal->x = mlx->comlex->Re;
+			mlx->fractal->y = mlx->comlex->Im;
+			ft_iteration(mlx, i, j);
 			j++;
 			mlx->comlex->Re += mlx->comlex->step_x;
 		}
