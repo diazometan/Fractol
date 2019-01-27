@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 14:00:56 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/01/26 17:21:31 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/01/27 19:04:58 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ void	ft_zoom(int key, t_mlx *mlx)
 	if (key == MOUSE_SCROLL_UP)
 		ft_zoom_helper(mlx, 1);
 	if (mlx->comlex->fractal_type == 1)
-        ft_draw_mandelbrot(mlx);
+		mlx->gpu_flag == 1 ? draw_gpu_fractal(mlx, 1) : ft_draw_mandelbrot(mlx);
     if (mlx->comlex->fractal_type == 2)
-        ft_draw_julia(mlx);
+		mlx->gpu_flag == 1 ? draw_gpu_fractal(mlx, 2) : ft_draw_julia(mlx);
     if (mlx->comlex->fractal_type == 3)
-        ft_draw_ship(mlx);
+		mlx->gpu_flag == 1 ? draw_gpu_fractal(mlx, 3) : ft_draw_ship(mlx);
 }
 
 int	mouse_press(int button, int x, int y, t_mlx *mlx)
@@ -66,14 +66,16 @@ int	mouse_move(int x, int y, t_mlx *mlx)
 	{
 		mlx->comlex->Re_Julia_const = (double)(mlx->mouse->x - WIN_WIDTH / 2) / (WIN_WIDTH / 2);
 		mlx->comlex->Im_Julia_const = (double)(mlx->mouse->y - WIN_HEIGHT / 2) / (WIN_HEIGHT / 2);
-		ft_draw_julia(mlx); 
+		draw_gpu_fractal(mlx, 2);
 	}
-	/*if (mlx->mouse->press_2 == 1)
+	if (mlx->mouse->press_2 == 1)
 	{
-		mlx->comlex->x_offset -= (mlx->mouse->x - mlx->mouse->pre_x);
-		mlx->comlex->y_offset -= (mlx->mouse->y - mlx->mouse->pre_y);
-		ft_draw(mlx);
-	}*/
+		mlx->comlex->Min_Re -= mlx->comlex->step_x * (mlx->mouse->x - mlx->mouse->pre_x);
+		mlx->comlex->Min_Im -= mlx->comlex->step_y * (mlx->mouse->y - mlx->mouse->pre_y);
+		mlx->comlex->Max_Re -= mlx->comlex->step_x * (mlx->mouse->x - mlx->mouse->pre_x);
+		mlx->comlex->Max_Im -= mlx->comlex->step_y * (mlx->mouse->y - mlx->mouse->pre_y);
+		draw_gpu_fractal(mlx, 1);
+	}
 	return (0);
 }
 

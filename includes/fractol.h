@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 11:51:56 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/01/26 19:08:05 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/01/27 19:24:58 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # define WIN_WIDTH 1000
 # define WIN_HEIGHT 1000
 
-# define MAX 50
+# define MAX 500
 
 # include <math.h>
 # include <stdlib.h>
@@ -93,6 +93,10 @@ typedef struct	s_comlex
 	double		x_offset;
 	double		y_offset;
 	int			fractal_type;
+	int			width;
+	int			height;
+	int			iter_max;
+	int			color;
 }				t_comlex;
 
 typedef struct	s_mlx
@@ -105,6 +109,7 @@ typedef struct	s_mlx
 	t_comlex	*comlex;
 	t_fractal	*fractal;
 	t_cl		*cl;
+	int			gpu_flag;
 }				t_mlx;
 
 void			ft_init_mlx(t_mlx *mlx);
@@ -125,7 +130,11 @@ void			ft_draw_ship(t_mlx *mlx);
 
 void			ft_zoom_helper(t_mlx *mlx, int type);
 
-float			ft_radian(double degree);
-int				ft_abs(int a);
+void			opencl_init(t_mlx *mlx);
+char			*create_gpu_sources();
+void			set_kernel_argc(t_mlx *mlx);
+void			draw_gpu_fractal(t_mlx *mlx, int type);
+
+void			ft_free_cl(t_mlx *mlx);
 
 #endif

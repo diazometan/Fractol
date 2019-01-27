@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 13:56:05 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/01/26 18:43:56 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/01/27 18:20:41 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,14 @@ void    ft_init_comlex(t_mlx *mlx)
 	mlx->comlex->Im_Julia_const = 0.156;
 	mlx->comlex->step_x = (mlx->comlex->Max_Re - mlx->comlex->Min_Re) / WIN_WIDTH;
 	mlx->comlex->step_y = (mlx->comlex->Max_Im - mlx->comlex->Min_Im) / WIN_HEIGHT;
+	mlx->comlex->width = WIN_WIDTH;
+	mlx->comlex->height = WIN_HEIGHT;
+	mlx->comlex->iter_max = MAX;
 }
 
 void	ft_init_mlx(t_mlx *mlx)
 {
+	mlx->gpu_flag = 0;
 	mlx->mlx_ptr = mlx_init();
 	mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "FRACTOL");
 	mlx->img.img_ptr = mlx_new_image(mlx->mlx_ptr, WIN_WIDTH, WIN_HEIGHT);

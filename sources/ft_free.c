@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   assistant.c                                        :+:      :+:    :+:   */
+/*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/18 14:06:01 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/01/24 11:56:41 by lwyl-the         ###   ########.fr       */
+/*   Created: 2019/01/27 12:56:12 by lwyl-the          #+#    #+#             */
+/*   Updated: 2019/01/27 13:01:08 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-float		ft_radian(double degree)
+void ft_free_cl(t_mlx *mlx)
 {
-	float	radian;
-
-	radian = degree * 3.14 / 180;
-	return (radian);
-}
-
-int			ft_abs(int a)
-{
-	if (a < 0)
-		return (-a);
-	return (a);
+    clReleaseProgram(mlx->cl->program);
+    clReleaseKernel(mlx->cl->kernel);
+    clReleaseCommandQueue(mlx->cl->commands);
+    clReleaseContext(mlx->cl->context);
+    clReleaseMemObject(mlx->cl->output);
+    free(mlx->cl);
 }

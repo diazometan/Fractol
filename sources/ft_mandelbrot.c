@@ -6,27 +6,11 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 14:47:36 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/01/26 17:19:32 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/01/27 19:11:59 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
-/*int rgb(int n, double a, double b)
-{
-	double r;
-	double g;
-	double d;
-	double color;
-	double color_1;
-
-	color = (n + 2 - log2(log2(a + b))) / MAX;
-	color_1 = color - (int)color;
-	r = (int)(74 * color_1);
-	g = (int)(205 * color_1);
-	d = (int)(196 * color_1);
-	return ((int)r << 16 | (int)g << 8 | (int)d);
-}*/
 
 static void	ft_iteration(t_mlx *mlx, int i, int j)
 {
