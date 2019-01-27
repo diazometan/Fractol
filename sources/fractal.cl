@@ -1,7 +1,7 @@
 #define RGB(r, g, b)(256 * 256 * (int)(r) + 256 * (int)(g) + (int)(b))
 
-int		color(int n, int itermax);
-int		color(int n, int itermax)
+int		ft_color(int n, int itermax);
+int		ft_color(int n, int itermax)
 {
 	float pct;
 
@@ -17,6 +17,44 @@ double	ft_abs_double(double nb)
 	if (nb >= 0)
 		return (nb);
 	return (-nb);
+}
+
+int	ft_get_color(int start, int end, double percent);
+int	ft_get_color(int start, int end, double percent)
+{
+   return ((int)((1 - percent) * start + percent * end));
+}
+
+int ft_red_color(int n, int itermax);
+int ft_red_color(int n, int itermax)
+{
+	double percent;
+	int red;
+	int green;
+	int blue;
+
+	if (n < itermax / 3)
+    {
+        percent = n / (double)(itermax / 3);
+        red = ft_get_color(0, 0xFF, percent);
+        green = ft_get_color(0, 0, percent);
+        blue = ft_get_color(0, 0, percent);
+    }
+    else if (n > (itermax * 2 / 3))
+    {
+        percent = (n * 2 / 3) / (double)(itermax * 2 / 3);
+        red = ft_get_color(0xFF, 0xFF, percent);
+        green = ft_get_color(0xFF, 0xFF, percent);
+        blue = ft_get_color(0xFF, 0, percent);
+    }
+    else
+    {
+        percent = n / (double)(itermax / 3);
+        red = ft_get_color(0xFF, 0xFF, percent);
+        green = ft_get_color(0, 0xFF, percent);
+        blue = ft_get_color(0, 0, percent);
+    }
+	return ((red << 16) | (green << 8) | blue);
 }
 
 __kernel void fractal(
@@ -97,9 +135,22 @@ __kernel void fractal(
             n++;
         }
     }
-   /* if (n == max_iter)
-		output[id] = 0;
-	else
-		output[id] = 0x00000F << n;*/
-   output[id] = color(n, max_iter);
+    if (color == 0)
+	{
+		if (n == max_iter)
+			output[id] = 0;
+		else
+			output[id] = 0xFFFFFF;
+	}
+	else if (color == 1)
+		output[id] = ft_color(n, max_iter);
+	else if (color == 2)
+	{
+		if (n == max_iter)
+			output[id] = 0;
+		else
+			output[id] = 0x00000F << n;
+	}
+	else if (color == 3)
+		output[id] = ft_red_color(n, max_iter);
 }

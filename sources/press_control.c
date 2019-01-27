@@ -6,14 +6,33 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 14:00:56 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/01/27 19:04:58 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/01/27 19:59:32 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
+void ft_redraw(t_mlx *mlx)
+{
+	if (mlx->comlex->fractal_type == 1)
+		mlx->gpu_flag == 1 ? draw_gpu_fractal(mlx, 1) : ft_draw_mandelbrot(mlx);
+    if (mlx->comlex->fractal_type == 2)
+		mlx->gpu_flag == 1 ? draw_gpu_fractal(mlx, 2) : ft_draw_julia(mlx);
+    if (mlx->comlex->fractal_type == 3)
+		mlx->gpu_flag == 1 ? draw_gpu_fractal(mlx, 3) : ft_draw_ship(mlx);
+}
+
 int	key_press(int key, t_mlx *mlx)
 {
+	if (key == KEYBOARD_ONE)
+		mlx->comlex->color = 0;
+	if (key == KEYBOARD_TWO)
+		mlx->comlex->color = 1;
+	if (key == KEYBOARD_THREE)
+		mlx->comlex->color = 2;
+	if (key == KEYBOARD_FOUR)
+		mlx->comlex->color = 3;
+	ft_redraw(mlx);
 	if (key == KEYBOARD_ESC)
 		exit(1);
 	return (0);
@@ -25,12 +44,7 @@ void	ft_zoom(int key, t_mlx *mlx)
 		ft_zoom_helper(mlx, 0);
 	if (key == MOUSE_SCROLL_UP)
 		ft_zoom_helper(mlx, 1);
-	if (mlx->comlex->fractal_type == 1)
-		mlx->gpu_flag == 1 ? draw_gpu_fractal(mlx, 1) : ft_draw_mandelbrot(mlx);
-    if (mlx->comlex->fractal_type == 2)
-		mlx->gpu_flag == 1 ? draw_gpu_fractal(mlx, 2) : ft_draw_julia(mlx);
-    if (mlx->comlex->fractal_type == 3)
-		mlx->gpu_flag == 1 ? draw_gpu_fractal(mlx, 3) : ft_draw_ship(mlx);
+	ft_redraw(mlx);
 }
 
 int	mouse_press(int button, int x, int y, t_mlx *mlx)

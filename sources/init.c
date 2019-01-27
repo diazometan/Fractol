@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 13:56:05 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/01/27 18:20:41 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/01/27 19:25:53 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void    ft_init_comlex(t_mlx *mlx)
 	mlx->comlex->width = WIN_WIDTH;
 	mlx->comlex->height = WIN_HEIGHT;
 	mlx->comlex->iter_max = MAX;
+	mlx->comlex->color = 0;
 }
 
 void	ft_init_mlx(t_mlx *mlx)

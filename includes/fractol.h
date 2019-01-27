@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 11:51:56 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/01/27 19:24:58 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/01/27 19:32:01 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,11 @@
 # define MOUSE_BUTTON_2 2
 # define MOUSE_SCROLL_UP 4
 # define MOUSE_SCROLL_DOWN 5
+# define KEYBOARD_ONE 18
+# define KEYBOARD_TWO 19
+# define KEYBOARD_THREE 20
+# define KEYBOARD_FOUR 21
+# define KEYBOARD_FIVE 22
 
 # define KEYBOARD_ESC 53
 
