@@ -6,7 +6,7 @@
 #    By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/10 16:55:04 by lwyl-the          #+#    #+#              #
-#    Updated: 2019/01/29 11:16:55 by lwyl-the         ###   ########.fr        #
+#    Updated: 2019/01/29 15:07:28 by lwyl-the         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,12 +23,14 @@ SRC = sources/main.c\
 	sources/fractals/ft_burnship.c\
 	sources/fractals/ft_julia.c\
 	sources/fractals/ft_tricorn.c\
+	sources/fractals/ft_bird.c\
+	sources/fractals/ft_buffalo.c\
 	sources/get_next_line.c\
-	sources/ft_draw_gpu.c\
-	sources/ft_kernel_args.c\
-	sources/ft_init_opencl.c\
-	sources/ft_create_gpu_sourcec.c\
-	sources/ft_free.c\
+	sources/gpu/ft_draw_gpu.c\
+	sources/gpu/ft_kernel_args.c\
+	sources/gpu/ft_init_opencl.c\
+	sources/gpu/ft_create_gpu_sourcec.c\
+	sources/gpu/ft_free.c\
 	sources/ft_usage.c\
 	sources/ft_redraw.c\
 	sources/ft_zoom.c
@@ -41,7 +43,7 @@ $(NAME): $(OBJ) $(LIB) $(MLX)
 	gcc -o $(NAME) -Llibft -lft $(OBJ) -L minilibx_macos -lmlx -framework OpenGL -framework AppKit -framework OpenCL
 
 .c.o:
-	gcc  -I includes/ -Ilibft -o $@ -c $<
+	gcc -Wall -Wextra -Werror -I includes/ -Ilibft -o $@ -c $<
 
 $(LIB):
 	cd libft && make

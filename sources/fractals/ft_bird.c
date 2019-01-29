@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_burnship.c                                      :+:      :+:    :+:   */
+/*   ft_bird.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/24 12:18:11 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/01/29 13:00:43 by lwyl-the         ###   ########.fr       */
+/*   Created: 2019/01/29 11:19:51 by lwyl-the          #+#    #+#             */
+/*   Updated: 2019/01/29 12:59:42 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,13 @@ static void		ft_iteration(t_mlx *mlx, int i, int j)
 	{
 		aa = mlx->fractal->x * mlx->fractal->x;
 		bb = mlx->fractal->y * mlx->fractal->y;
-		twoab = 2.0 * mlx->fractal->x * mlx->fractal->y;
+		twoab = (3.0 * mlx->fractal->x * mlx->fractal->x -
+							mlx->fractal->y * mlx->fractal->y);
 		if (aa + bb > 4.0)
 			break ;
-		mlx->fractal->x = aa - bb + mlx->comlex->re;
-		mlx->fractal->y = fabs(twoab) + mlx->comlex->im;
+		mlx->fractal->x = (aa - 3 * bb) * fabs(mlx->fractal->x) +
+							mlx->comlex->re;
+		mlx->fractal->y = twoab * fabs(mlx->fractal->y) + mlx->comlex->im;
 		n++;
 	}
 	if (n == MAX)
@@ -37,13 +39,13 @@ static void		ft_iteration(t_mlx *mlx, int i, int j)
 		mlx->img.data[j + WIN_WIDTH * i] = 0x00000F << n;
 }
 
-void			ft_draw_ship(t_mlx *mlx)
+void			ft_draw_bird(t_mlx *mlx)
 {
 	int			i;
 	int			j;
 
 	mlx_clear_window(mlx->mlx_ptr, mlx->win_ptr);
-	mlx->comlex->fractal_type = 3;
+	mlx->comlex->fractal_type = 6;
 	mlx->comlex->im = mlx->comlex->min_im;
 	i = 0;
 	while (i < WIN_HEIGHT)

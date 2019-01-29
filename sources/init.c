@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 13:56:05 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/01/29 09:04:26 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/01/29 13:11:52 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_init_fractal(t_mlx *mlx)
 {
-	if(!(mlx->fractal = (t_fractal*)malloc(sizeof(t_fractal))))
+	if (!(mlx->fractal = (t_fractal*)malloc(sizeof(t_fractal))))
 		exit(1);
 }
 
@@ -26,22 +26,24 @@ void	ft_init_mouse(t_mlx *mlx)
 	mlx->mouse->y = 0;
 }
 
-void    ft_init_comlex(t_mlx *mlx, int type)
+void	ft_init_comlex(t_mlx *mlx, int type)
 {
-    if(!(mlx->comlex = (t_comlex*)malloc(sizeof(t_comlex))))
-        exit(1);
-    mlx->comlex->Re = 0;
-    mlx->comlex->Im = 0;
-    mlx->comlex->Re_c = 0;
-    mlx->comlex->Im_c = 0;
-	mlx->comlex->Min_Re = -2.0;
-	mlx->comlex->Max_Re = 2.0;
-	mlx->comlex->Min_Im = -2.0;
-	mlx->comlex->Max_Im = 2.0;
-	mlx->comlex->Re_Julia_const = -0.8;
-	mlx->comlex->Im_Julia_const = 0.156;
-	mlx->comlex->step_x = (mlx->comlex->Max_Re - mlx->comlex->Min_Re) / WIN_WIDTH;
-	mlx->comlex->step_y = (mlx->comlex->Max_Im - mlx->comlex->Min_Im) / WIN_HEIGHT;
+	if (!(mlx->comlex = (t_comlex*)malloc(sizeof(t_comlex))))
+		exit(1);
+	mlx->comlex->re = 0;
+	mlx->comlex->im = 0;
+	mlx->comlex->re_c = 0;
+	mlx->comlex->im_c = 0;
+	mlx->comlex->min_re = -2.0;
+	mlx->comlex->max_re = 2.0;
+	mlx->comlex->min_im = -2.0;
+	mlx->comlex->max_im = 2.0;
+	mlx->comlex->re_julia_const = -0.8;
+	mlx->comlex->im_julia_const = 0.156;
+	mlx->comlex->step_x = (mlx->comlex->max_re - mlx->comlex->min_re) /
+			WIN_WIDTH;
+	mlx->comlex->step_y = (mlx->comlex->max_im - mlx->comlex->min_im) /
+			WIN_HEIGHT;
 	mlx->comlex->width = WIN_WIDTH;
 	mlx->comlex->height = WIN_HEIGHT;
 	mlx->comlex->iter_max = MAX;
@@ -52,7 +54,8 @@ void    ft_init_comlex(t_mlx *mlx, int type)
 void	ft_init_mlx(t_mlx *mlx)
 {
 	mlx->mlx_ptr = mlx_init();
-	mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "FRACTOL");
+	mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, WIN_WIDTH, WIN_HEIGHT,
+			"FRACTOL");
 	mlx->img.img_ptr = mlx_new_image(mlx->mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
 	mlx->img.data = (int *)mlx_get_data_addr(mlx->img.img_ptr, &mlx->img.bpp,
 		&mlx->img.size_l, &mlx->img.endian);

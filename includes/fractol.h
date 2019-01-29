@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 11:51:56 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/01/29 11:02:15 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/01/29 15:08:09 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # define WIN_HEIGHT 1000
 
 # define MAX 500
+
+# define GPU_CODE "sources/gpu/fractal.cl"
 
 # include <math.h>
 # include <stdlib.h>
@@ -41,6 +43,7 @@
 # define KEYBOARD_R 15
 # define NUMPAD_PLUS 69
 # define NUMPAD_MINUS 78
+# define KEYBOARD_SPACE 49
 
 # define KEYBOARD_ESC 53
 
@@ -85,18 +88,18 @@ typedef struct			s_cl
 
 typedef struct			s_comlex
 {
-	double				Re;
-	double				Im;
-	double				Re_c;
-	double				Im_c;
-	double				Min_Re;
-	double				Max_Re;
-	double				Min_Im;
-	double				Max_Im;
+	double				re;
+	double				im;
+	double				re_c;
+	double				im_c;
+	double				min_re;
+	double				max_re;
+	double				min_im;
+	double				max_im;
 	double				step_x;
 	double				step_y;
-	double				Re_Julia_const;
-	double				Im_Julia_const;
+	double				re_julia_const;
+	double				im_julia_const;
 	int					fractal_type;
 	int					width;
 	int					height;
@@ -114,13 +117,13 @@ typedef struct			s_mlx
 	t_fractal			*fractal;
 	t_cl				*cl;
 	int					gpu_flag;
+	int					julia;
 }						t_mlx;
 
 void					ft_init_mlx(t_mlx *mlx);
 void					ft_init_key(t_mlx *mlx);
 void					ft_init_comlex(t_mlx *mlx, int type);
 void					ft_init_fractal(t_mlx *mlx);
-void					ft_init_cl(t_mlx *mlx);
 void					ft_init_mouse(t_mlx *mlx);
 
 int						key_press(int key, t_mlx *mlx);
@@ -133,6 +136,8 @@ void					ft_draw_mandelbrot(t_mlx *mlx);
 void					ft_draw_julia(t_mlx *mlx);
 void					ft_draw_ship(t_mlx *mlx);
 void					ft_draw_tricorn(t_mlx *mlx);
+void					ft_draw_bird(t_mlx *mlx);
+void					ft_draw_buffalo(t_mlx *mlx);
 
 void					ft_zoom(int key, t_mlx *mlx);
 
@@ -142,11 +147,11 @@ void					set_kernel_argc(t_mlx *mlx);
 void					draw_gpu_fractal(t_mlx *mlx, int type);
 
 void					ft_redraw(t_mlx *mlx);
-void 					ft_basic_settings(t_mlx *mlx);
+void					ft_basic_settings(t_mlx *mlx);
 
 void					ft_free(t_mlx *mlx);
 
 int						ft_check_argv(t_mlx *mlx, char **argv);
-void					ft_str_usage();
+void					ft_str_usage(void);
 
 #endif

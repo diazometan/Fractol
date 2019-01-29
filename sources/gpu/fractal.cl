@@ -186,7 +186,7 @@ __kernel void fractal(
 		if (n == max_iter)
 			output[id] = 0;
 		else
-			output[id] = 0xFFFFFF;
+			output[id] = 265 * n;
 	}
 	else if (color == 1)
 		output[id] = ft_color(n, max_iter);

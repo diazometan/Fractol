@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_burnship.c                                      :+:      :+:    :+:   */
+/*   ft_buffalo.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/24 12:18:11 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/01/29 13:00:43 by lwyl-the         ###   ########.fr       */
+/*   Created: 2019/01/29 11:36:53 by lwyl-the          #+#    #+#             */
+/*   Updated: 2019/01/29 13:00:09 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void		ft_iteration(t_mlx *mlx, int i, int j)
 		twoab = 2.0 * mlx->fractal->x * mlx->fractal->y;
 		if (aa + bb > 4.0)
 			break ;
-		mlx->fractal->x = aa - bb + mlx->comlex->re;
+		mlx->fractal->x = fabs(aa - bb) + mlx->comlex->re;
 		mlx->fractal->y = fabs(twoab) + mlx->comlex->im;
 		n++;
 	}
@@ -37,13 +37,13 @@ static void		ft_iteration(t_mlx *mlx, int i, int j)
 		mlx->img.data[j + WIN_WIDTH * i] = 0x00000F << n;
 }
 
-void			ft_draw_ship(t_mlx *mlx)
+void			ft_draw_buffalo(t_mlx *mlx)
 {
 	int			i;
 	int			j;
 
 	mlx_clear_window(mlx->mlx_ptr, mlx->win_ptr);
-	mlx->comlex->fractal_type = 3;
+	mlx->comlex->fractal_type = 5;
 	mlx->comlex->im = mlx->comlex->min_im;
 	i = 0;
 	while (i < WIN_HEIGHT)

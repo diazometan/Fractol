@@ -6,13 +6,24 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 14:00:56 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/01/29 08:54:05 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/01/29 15:04:17 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int	key_press(int key, t_mlx *mlx)
+static void		ft_move_julia(t_mlx *mlx)
+{
+	if (mlx->julia == 1)
+		return ;
+	mlx->comlex->re_julia_const = (double)(mlx->mouse->x - WIN_WIDTH / 2)
+			/ (WIN_WIDTH / 2);
+	mlx->comlex->im_julia_const = (double)(mlx->mouse->y - WIN_HEIGHT / 2)
+			/ (WIN_HEIGHT / 2);
+	ft_redraw(mlx);
+}
+
+int				key_press(int key, t_mlx *mlx)
 {
 	if (key == KEYBOARD_ONE)
 		mlx->comlex->color = 0;
@@ -28,13 +39,19 @@ int	key_press(int key, t_mlx *mlx)
 		mlx->comlex->iter_max += 10;
 	if (key == NUMPAD_MINUS)
 		mlx->comlex->iter_max -= 10;
+	if (key == KEYBOARD_SPACE && mlx->comlex->fractal_type == 2)
+	{
+		mlx->julia++;
+		if (mlx->julia > 1)
+			mlx->julia = 0;
+	}
 	ft_redraw(mlx);
 	if (key == KEYBOARD_ESC)
 		exit(1);
 	return (0);
 }
 
-int	mouse_press(int button, int x, int y, t_mlx *mlx)
+int				mouse_press(int button, int x, int y, t_mlx *mlx)
 {
 	if (x <= 0 || x >= WIN_WIDTH || y <= 0 || y >= WIN_HEIGHT)
 		return (0);
@@ -47,7 +64,7 @@ int	mouse_press(int button, int x, int y, t_mlx *mlx)
 	return (0);
 }
 
-int	mouse_release(int button, int x, int y, t_mlx *mlx)
+int				mouse_release(int button, int x, int y, t_mlx *mlx)
 {
 	if (x <= 0 || x >= WIN_WIDTH || y <= 0 || y >= WIN_HEIGHT)
 		return (0);
@@ -57,30 +74,24 @@ int	mouse_release(int button, int x, int y, t_mlx *mlx)
 	return (0);
 }
 
-int	mouse_move(int x, int y, t_mlx *mlx)
+int				mouse_move(int x, int y, t_mlx *mlx)
 {
 	mlx->mouse->pre_x = mlx->mouse->x;
 	mlx->mouse->pre_y = mlx->mouse->y;
 	mlx->mouse->x = x;
 	mlx->mouse->y = y;
-	if (mlx->mouse->press_1 == 1 && mlx->comlex->fractal_type == 2)
-	{
-		mlx->comlex->Re_Julia_const = (double)(mlx->mouse->x - WIN_WIDTH / 2) / (WIN_WIDTH / 2);
-		mlx->comlex->Im_Julia_const = (double)(mlx->mouse->y - WIN_HEIGHT / 2) / (WIN_HEIGHT / 2);
-		draw_gpu_fractal(mlx, 2);
-	}
+	ft_move_julia(mlx);
 	if (mlx->mouse->press_2 == 1)
 	{
-		mlx->comlex->Min_Re -= mlx->comlex->step_x * (mlx->mouse->x - mlx->mouse->pre_x);
-		mlx->comlex->Min_Im -= mlx->comlex->step_y * (mlx->mouse->y - mlx->mouse->pre_y);
-		mlx->comlex->Max_Re -= mlx->comlex->step_x * (mlx->mouse->x - mlx->mouse->pre_x);
-		mlx->comlex->Max_Im -= mlx->comlex->step_y * (mlx->mouse->y - mlx->mouse->pre_y);
-		draw_gpu_fractal(mlx, mlx->comlex->fractal_type);
+		mlx->comlex->min_re -= mlx->comlex->step_x *
+				(mlx->mouse->x - mlx->mouse->pre_x);
+		mlx->comlex->min_im -= mlx->comlex->step_y *
+				(mlx->mouse->y - mlx->mouse->pre_y);
+		mlx->comlex->max_re -= mlx->comlex->step_x *
+				(mlx->mouse->x - mlx->mouse->pre_x);
+		mlx->comlex->max_im -= mlx->comlex->step_y *
+				(mlx->mouse->y - mlx->mouse->pre_y);
+		ft_redraw(mlx);
 	}
 	return (0);
-}
-
-int	exit_x(void)
-{
-	exit(1);
 }
