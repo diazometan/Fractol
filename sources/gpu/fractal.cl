@@ -11,6 +11,17 @@ int		ft_color(int n, int itermax)
 	return ((RGB(100, pct * 255, 100)));
 }
 
+int     ft_color_smooth(int n, double z_r, double z_i);
+int     ft_color_smooth(int n, double z_r, double z_i)
+{
+    double modul;
+    int mu;
+
+    modul = sqrt(z_r * z_r + z_i * z_i);
+    mu = n - (log(log(modul))) / log(2.0);
+    return ((RGB(100, mu * 255, 100)));
+}
+
 double	ft_abs_double(double nb);
 double	ft_abs_double(double nb)
 {
@@ -36,23 +47,23 @@ int ft_red_color(int n, int itermax)
 	if (n < itermax / 3)
     {
         percent = n / (double)(itermax / 3);
-        red = ft_get_color(0, 0xFF, percent);
-        green = ft_get_color(0, 0, percent);
-        blue = ft_get_color(0, 0, percent);
+        red = ft_get_color((0x000000 >> 16) & 0xFF, (0xFF0000 >> 16) & 0xFF, percent);
+        green = ft_get_color((0x000000 >> 8) & 0xFF, (0xFF0000 >> 8) & 0xFF, percent);
+        blue = ft_get_color(0x000000 & 0xFF, 0xFF0000 & 0xFF, percent);
     }
     else if (n > (itermax * 2 / 3))
     {
         percent = (n * 2 / 3) / (double)(itermax * 2 / 3);
-        red = ft_get_color(0xFF, 0xFF, percent);
-        green = ft_get_color(0xFF, 0xFF, percent);
-        blue = ft_get_color(0xFF, 0, percent);
+        red = ft_get_color((0xFFFF00 >> 16) & 0xFF, (0xFFFFFF >> 16) & 0xFF, percent);
+        green = ft_get_color((0xFFFF00 >> 8) & 0xFF,  (0xFFFFFF >> 8) & 0xFF, percent);
+        blue = ft_get_color(0xFFFF00 & 0xFF, 0xFFFFFF & 0xFF, percent);
     }
     else
     {
         percent = n / (double)(itermax / 3);
-        red = ft_get_color(0xFF, 0xFF, percent);
-        green = ft_get_color(0, 0xFF, percent);
-        blue = ft_get_color(0, 0, percent);
+        red = ft_get_color((0xFF0000 >> 16) & 0xFF, (0xFFFF00 >> 16) & 0xFF, percent);
+        green = ft_get_color((0xFF0000 >> 8) & 0xFF, (0xFFFF00 >> 8) & 0xFF, percent);
+        blue = ft_get_color(0xFF0000 & 0xFF, 0xFFFF00 & 0xFF, percent);
     }
 	return ((red << 16) | (green << 8) | blue);
 }
@@ -199,4 +210,6 @@ __kernel void fractal(
 	}
 	else if (color == 3)
 		output[id] = ft_red_color(n, max_iter);
+    else if (color == 4)
+		output[id] = ft_color_smooth(n, z_r, z_i);
 }

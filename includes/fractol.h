@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 11:51:56 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/01/29 15:08:09 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/01/29 17:40:29 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # define WIN_HEIGHT 1000
 
 # define MAX 500
+
+# define ZOOM_MAX 1E-15
 
 # define GPU_CODE "sources/gpu/fractal.cl"
 
@@ -39,7 +41,7 @@
 # define KEYBOARD_TWO 19
 # define KEYBOARD_THREE 20
 # define KEYBOARD_FOUR 21
-# define KEYBOARD_FIVE 22
+# define KEYBOARD_FIVE 23
 # define KEYBOARD_R 15
 # define NUMPAD_PLUS 69
 # define NUMPAD_MINUS 78

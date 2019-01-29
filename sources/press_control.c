@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 14:00:56 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/01/29 15:04:17 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/01/29 16:14:47 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int				key_press(int key, t_mlx *mlx)
 		mlx->comlex->color = 2;
 	if (key == KEYBOARD_FOUR)
 		mlx->comlex->color = 3;
+	if (key == KEYBOARD_FIVE)
+		mlx->comlex->color = 4;
 	if (key == KEYBOARD_R)
 		ft_basic_settings(mlx);
 	if (key == NUMPAD_PLUS)
