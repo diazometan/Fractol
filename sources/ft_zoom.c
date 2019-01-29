@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/26 17:20:47 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/01/29 17:39:59 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/01/29 18:28:20 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,6 @@ static void		ft_zoom_helper(t_mlx *mlx, int type)
 	double		mouse_x;
 	double		mouse_y;
 
-	if (mlx->comlex->min_re >= mlx->comlex->max_re || mlx->comlex->min_im >= mlx->comlex->max_im)
-	{
-		return ;
-	}
 	mouse_x = mlx->mouse->x * ((mlx->comlex->max_re - mlx->comlex->min_re) /
 			WIN_WIDTH) + mlx->comlex->min_re;
 	mouse_y = mlx->mouse->y * ((mlx->comlex->max_im - mlx->comlex->min_im) /

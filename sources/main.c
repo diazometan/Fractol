@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 11:51:21 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/01/29 15:04:30 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/01/29 18:38:39 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,5 @@ int				main(int argc, char **argv)
 	else
 		ft_redraw(&mlx);
 	mlx_loop(mlx.mlx_ptr);
-	ft_free(&mlx);
 	return (0);
 }

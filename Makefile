@@ -6,7 +6,7 @@
 #    By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/10 16:55:04 by lwyl-the          #+#    #+#              #
-#    Updated: 2019/01/29 15:07:28 by lwyl-the         ###   ########.fr        #
+#    Updated: 2019/01/29 18:44:12 by lwyl-the         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRC = sources/main.c\
 	sources/gpu/ft_init_opencl.c\
 	sources/gpu/ft_create_gpu_sourcec.c\
 	sources/gpu/ft_free.c\
+	sources/ft_mouse_move.c\
 	sources/ft_usage.c\
 	sources/ft_redraw.c\
 	sources/ft_zoom.c
