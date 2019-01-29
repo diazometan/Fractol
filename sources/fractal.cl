@@ -89,6 +89,7 @@ __kernel void fractal(
     
     x = id % width;
     y = id / width;
+    tmp = 0;
 
     if (fractal == 1)
     {
@@ -132,6 +133,51 @@ __kernel void fractal(
             tmp = z_r;
             z_r = z_r * z_r - z_i * z_i + c_r;
             z_i = fabs(2.0 * z_i * tmp) + c_i;
+            n++;
+        }
+    }
+    else if (fractal == 4)
+    {
+        c_i = Min_Im + y * step_y;
+        c_r = Min_Re + x * step_x;
+        z_r = 0;
+        z_i = 0;
+        n = 0;
+        while (z_r * z_r + z_i * z_i < 4.0 && n < max_iter)
+        {
+            tmp = z_r;
+            z_r = z_r * z_r - z_i * z_i + c_r;
+            z_i = -2.0 * z_i * tmp + c_i;
+            n++;
+        }
+    }
+    else if (fractal == 5)
+    {
+        c_i = Min_Im + y * step_y;
+        c_r = Min_Re + x * step_x;
+        z_r = 0;
+        z_i = 0;
+        n = 0;
+        while (z_r * z_r + z_i * z_i < 4.0 && n < max_iter)
+        {
+            tmp = z_r;
+            z_r = fabs(z_r * z_r - z_i * z_i) + c_r;
+            z_i = 2.0 * fabs(tmp * z_i) + c_i;
+            n++;
+        }
+    }
+    else if (fractal == 6)
+    {
+        c_i = Min_Im + y * step_y;
+        c_r = Min_Re + x * step_x;
+        z_r = 0;
+        z_i = 0;
+        n = 0;
+        while (z_r * z_r + z_i * z_i < 4.0 && n < max_iter)
+        {
+            tmp = z_r;
+            z_r = (z_r * z_r - (z_i * z_i * 3)) * fabs(z_r) + c_r;
+            z_i = ((tmp * tmp * 3) - z_i * z_i) * fabs(z_i) + c_i;
             n++;
         }
     }

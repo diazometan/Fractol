@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 11:51:56 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/01/27 19:32:01 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/01/29 11:02:15 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,108 +38,115 @@
 # define KEYBOARD_THREE 20
 # define KEYBOARD_FOUR 21
 # define KEYBOARD_FIVE 22
+# define KEYBOARD_R 15
+# define NUMPAD_PLUS 69
+# define NUMPAD_MINUS 78
 
 # define KEYBOARD_ESC 53
 
-typedef struct	s_img
+typedef struct			s_img
 {
-	void		*img_ptr;
-	int			*data;
-	int			size_l;
-	int			bpp;
-	int			endian;
-}				t_img;
+	void				*img_ptr;
+	int					*data;
+	int					size_l;
+	int					bpp;
+	int					endian;
+}						t_img;
 
-typedef struct	s_mouse
+typedef struct			s_mouse
 {
-	double		x;
-	double		y;
-	int			pre_x;
-	int			pre_y;
-	int			press_1;
-	int			press_2;
-}				t_mouse;
+	double				x;
+	double				y;
+	int					pre_x;
+	int					pre_y;
+	int					press_1;
+	int					press_2;
+}						t_mouse;
 
-typedef struct	s_fractal
+typedef struct			s_fractal
 {
-	double		x;
-	double		y;
-	double		two_x_y;
-}				t_fractal;
+	double				x;
+	double				y;
+	double				two_x_y;
+}						t_fractal;
 
-typedef struct	s_cl
+typedef struct			s_cl
 {
-	int			err;
-	cl_device_id device_id;
-	cl_context context;
-	cl_command_queue commands;
-	cl_program program;
-	cl_kernel kernel;
-	cl_mem output;
-	size_t local;
-	size_t global;
-}				t_cl;
+	int					err;
+	cl_device_id		device_id;
+	cl_context			context;
+	cl_command_queue	commands;
+	cl_program			program;
+	cl_kernel			kernel;
+	cl_mem				output;
+	size_t				local;
+	size_t				global;
+}						t_cl;
 
-typedef struct	s_comlex
+typedef struct			s_comlex
 {
-	double		Re;
-	double		Im;
-	double		Re_c;
-	double		Im_c;
-	double		Min_Re;
-	double		Max_Re;
-	double		Min_Im;
-	double		Max_Im;
-	double		step_x;
-	double		step_y;
-	double		Re_Julia_const;
-	double		Im_Julia_const;
-	double		zoom;
-	double		x_offset;
-	double		y_offset;
-	int			fractal_type;
-	int			width;
-	int			height;
-	int			iter_max;
-	int			color;
-}				t_comlex;
+	double				Re;
+	double				Im;
+	double				Re_c;
+	double				Im_c;
+	double				Min_Re;
+	double				Max_Re;
+	double				Min_Im;
+	double				Max_Im;
+	double				step_x;
+	double				step_y;
+	double				Re_Julia_const;
+	double				Im_Julia_const;
+	int					fractal_type;
+	int					width;
+	int					height;
+	int					iter_max;
+	int					color;
+}						t_comlex;
 
-typedef struct	s_mlx
+typedef struct			s_mlx
 {
-	void		*mlx_ptr;
-	void		*win_ptr;
-	int			*buffer;
-	t_img		img;
-	t_mouse		*mouse;
-	t_comlex	*comlex;
-	t_fractal	*fractal;
-	t_cl		*cl;
-	int			gpu_flag;
-}				t_mlx;
+	void				*mlx_ptr;
+	void				*win_ptr;
+	t_img				img;
+	t_mouse				*mouse;
+	t_comlex			*comlex;
+	t_fractal			*fractal;
+	t_cl				*cl;
+	int					gpu_flag;
+}						t_mlx;
 
-void			ft_init_mlx(t_mlx *mlx);
-void			ft_init_key(t_mlx *mlx);
-void			ft_init_comlex(t_mlx *mlx);
-void			ft_init_fractal(t_mlx *mlx);
-void			ft_init_cl(t_mlx *mlx);
+void					ft_init_mlx(t_mlx *mlx);
+void					ft_init_key(t_mlx *mlx);
+void					ft_init_comlex(t_mlx *mlx, int type);
+void					ft_init_fractal(t_mlx *mlx);
+void					ft_init_cl(t_mlx *mlx);
+void					ft_init_mouse(t_mlx *mlx);
 
-int				key_press(int key, t_mlx *mlx);
-int				mouse_press(int button, int x, int y, t_mlx *mlx);
-int				mouse_release(int button, int x, int y, t_mlx *mlx);
-int				mouse_move(int x, int y, t_mlx *mlx);
-int				exit_x(void);
+int						key_press(int key, t_mlx *mlx);
+int						mouse_press(int button, int x, int y, t_mlx *mlx);
+int						mouse_release(int button, int x, int y, t_mlx *mlx);
+int						mouse_move(int x, int y, t_mlx *mlx);
+int						exit_x(void);
 
-void			ft_draw_mandelbrot(t_mlx *mlx);
-void			ft_draw_julia(t_mlx *mlx);
-void			ft_draw_ship(t_mlx *mlx);
+void					ft_draw_mandelbrot(t_mlx *mlx);
+void					ft_draw_julia(t_mlx *mlx);
+void					ft_draw_ship(t_mlx *mlx);
+void					ft_draw_tricorn(t_mlx *mlx);
 
-void			ft_zoom_helper(t_mlx *mlx, int type);
+void					ft_zoom(int key, t_mlx *mlx);
 
-void			opencl_init(t_mlx *mlx);
-char			*create_gpu_sources();
-void			set_kernel_argc(t_mlx *mlx);
-void			draw_gpu_fractal(t_mlx *mlx, int type);
+void					opencl_init(t_mlx *mlx);
+char					*create_gpu_sources();
+void					set_kernel_argc(t_mlx *mlx);
+void					draw_gpu_fractal(t_mlx *mlx, int type);
 
-void			ft_free_cl(t_mlx *mlx);
+void					ft_redraw(t_mlx *mlx);
+void 					ft_basic_settings(t_mlx *mlx);
+
+void					ft_free(t_mlx *mlx);
+
+int						ft_check_argv(t_mlx *mlx, char **argv);
+void					ft_str_usage();
 
 #endif

@@ -6,21 +6,11 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 14:00:56 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/01/27 19:59:32 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/01/29 08:54:05 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
-void ft_redraw(t_mlx *mlx)
-{
-	if (mlx->comlex->fractal_type == 1)
-		mlx->gpu_flag == 1 ? draw_gpu_fractal(mlx, 1) : ft_draw_mandelbrot(mlx);
-    if (mlx->comlex->fractal_type == 2)
-		mlx->gpu_flag == 1 ? draw_gpu_fractal(mlx, 2) : ft_draw_julia(mlx);
-    if (mlx->comlex->fractal_type == 3)
-		mlx->gpu_flag == 1 ? draw_gpu_fractal(mlx, 3) : ft_draw_ship(mlx);
-}
 
 int	key_press(int key, t_mlx *mlx)
 {
@@ -32,19 +22,16 @@ int	key_press(int key, t_mlx *mlx)
 		mlx->comlex->color = 2;
 	if (key == KEYBOARD_FOUR)
 		mlx->comlex->color = 3;
+	if (key == KEYBOARD_R)
+		ft_basic_settings(mlx);
+	if (key == NUMPAD_PLUS)
+		mlx->comlex->iter_max += 10;
+	if (key == NUMPAD_MINUS)
+		mlx->comlex->iter_max -= 10;
 	ft_redraw(mlx);
 	if (key == KEYBOARD_ESC)
 		exit(1);
 	return (0);
-}
-
-void	ft_zoom(int key, t_mlx *mlx)
-{
-	if (key == MOUSE_SCROLL_DOWN)
-		ft_zoom_helper(mlx, 0);
-	if (key == MOUSE_SCROLL_UP)
-		ft_zoom_helper(mlx, 1);
-	ft_redraw(mlx);
 }
 
 int	mouse_press(int button, int x, int y, t_mlx *mlx)
@@ -88,7 +75,7 @@ int	mouse_move(int x, int y, t_mlx *mlx)
 		mlx->comlex->Min_Im -= mlx->comlex->step_y * (mlx->mouse->y - mlx->mouse->pre_y);
 		mlx->comlex->Max_Re -= mlx->comlex->step_x * (mlx->mouse->x - mlx->mouse->pre_x);
 		mlx->comlex->Max_Im -= mlx->comlex->step_y * (mlx->mouse->y - mlx->mouse->pre_y);
-		draw_gpu_fractal(mlx, 1);
+		draw_gpu_fractal(mlx, mlx->comlex->fractal_type);
 	}
 	return (0);
 }

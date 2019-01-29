@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 13:56:05 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/01/27 19:25:53 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/01/29 09:04:26 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,15 @@ void	ft_init_fractal(t_mlx *mlx)
 		exit(1);
 }
 
-void	ft_init_cl(t_mlx *mlx)
+void	ft_init_mouse(t_mlx *mlx)
 {
-	if(!(mlx->cl = (t_cl*)malloc(sizeof(t_cl))))
+	if (!(mlx->mouse = (t_mouse*)malloc(sizeof(t_mouse))))
 		exit(1);
+	mlx->mouse->x = 0;
+	mlx->mouse->y = 0;
 }
 
-void    ft_init_comlex(t_mlx *mlx)
+void    ft_init_comlex(t_mlx *mlx, int type)
 {
     if(!(mlx->comlex = (t_comlex*)malloc(sizeof(t_comlex))))
         exit(1);
@@ -32,7 +34,6 @@ void    ft_init_comlex(t_mlx *mlx)
     mlx->comlex->Im = 0;
     mlx->comlex->Re_c = 0;
     mlx->comlex->Im_c = 0;
-	mlx->comlex->zoom = 1;
 	mlx->comlex->Min_Re = -2.0;
 	mlx->comlex->Max_Re = 2.0;
 	mlx->comlex->Min_Im = -2.0;
@@ -45,11 +46,11 @@ void    ft_init_comlex(t_mlx *mlx)
 	mlx->comlex->height = WIN_HEIGHT;
 	mlx->comlex->iter_max = MAX;
 	mlx->comlex->color = 0;
+	mlx->comlex->fractal_type = type;
 }
 
 void	ft_init_mlx(t_mlx *mlx)
 {
-	mlx->gpu_flag = 0;
 	mlx->mlx_ptr = mlx_init();
 	mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "FRACTOL");
 	mlx->img.img_ptr = mlx_new_image(mlx->mlx_ptr, WIN_WIDTH, WIN_HEIGHT);

@@ -6,7 +6,7 @@
 #    By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/10 16:55:04 by lwyl-the          #+#    #+#              #
-#    Updated: 2019/01/27 18:51:44 by lwyl-the         ###   ########.fr        #
+#    Updated: 2019/01/29 11:16:55 by lwyl-the         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,14 +19,18 @@ LIB = libft/libft.a
 SRC = sources/main.c\
 	sources/init.c\
 	sources/press_control.c\
-	sources/ft_mandelbrot.c\
-	sources/ft_burnship.c\
-	sources/ft_julia.c\
+	sources/fractals/ft_mandelbrot.c\
+	sources/fractals/ft_burnship.c\
+	sources/fractals/ft_julia.c\
+	sources/fractals/ft_tricorn.c\
 	sources/get_next_line.c\
 	sources/ft_draw_gpu.c\
 	sources/ft_kernel_args.c\
 	sources/ft_init_opencl.c\
 	sources/ft_create_gpu_sourcec.c\
+	sources/ft_free.c\
+	sources/ft_usage.c\
+	sources/ft_redraw.c\
 	sources/ft_zoom.c
 
 OBJ = $(SRC:.c=.o)
