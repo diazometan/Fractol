@@ -6,7 +6,7 @@
 /*   By: lwyl-the <lwyl-the@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 08:48:25 by lwyl-the          #+#    #+#             */
-/*   Updated: 2019/01/29 12:54:09 by lwyl-the         ###   ########.fr       */
+/*   Updated: 2019/02/07 10:11:20 by lwyl-the         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	ft_redraw(t_mlx *mlx)
 
 void	ft_basic_settings(t_mlx *mlx)
 {
+	mlx->comlex->iter_max = 500;
 	mlx->comlex->min_re = -2.0;
 	mlx->comlex->max_re = 2.0;
 	mlx->comlex->min_im = -2.0;
